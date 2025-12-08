@@ -12,7 +12,7 @@ public class Move : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] InputAction startMove = new InputAction(type: InputActionType.Button); // Enter arrow key
     public bool isPressedUI = false; // Set to true by UI button
-    private bool isPressed = false; 
+    private bool isPressed = false;
 
     // Subscribe and unsubscribe to input action events
     void OnEnable()
