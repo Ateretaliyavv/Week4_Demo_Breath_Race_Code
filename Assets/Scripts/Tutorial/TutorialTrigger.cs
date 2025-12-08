@@ -1,11 +1,18 @@
 using UnityEngine;
 
+/*
+ * TutorialTrigger:
+ * - Attached to trigger zones in the game world.
+ * - When the player enters the trigger, it calls the TutorialManager to display instructions.
+ * - Configurable via Inspector for different tutorial types and messages.
+ */
+
 public class TutorialTrigger : MonoBehaviour
 {
     [Header("Tutorial Settings")]
     [TextArea]
     public string instructions; // The text to display in the UI
-    public TutorialType tutorialType; // Select via dropdown: Jump or Bridge
+    public TutorialType tutorialType; // Jump or Bridge
 
     [Header("Manager Reference")]
     [SerializeField] private TutorialManager manager;

@@ -1,6 +1,10 @@
 using TMPro;
 using UnityEngine;
 
+/*
+ * Collects objects with a specified tag when the player collides with them.
+ */
+
 public class CollectObjects : MonoBehaviour
 {
     [SerializeField]

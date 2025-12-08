@@ -1,7 +1,13 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; // Use TMPro if you prefer TextMeshPro
+using UnityEngine.UI;
 
+/*
+ * TutorialManager:
+ * - Manages tutorial popups that pause the game and show instructions.
+ * - Disables player controls during the tutorial.
+ * - Re-enables specific abilities after the tutorial is confirmed.
+ */
 public class TutorialManager : MonoBehaviour
 {
     [Header("Player Scripts References")]
@@ -12,7 +18,7 @@ public class TutorialManager : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private GameObject tutorialPanel; // The main UI panel background
     [SerializeField] private TextMeshProUGUI tutorialText;        // The text element for instructions
-    [SerializeField] private Button confirmButton;     // The "OK" button
+    [SerializeField] private Button confirmButton;     // The "Play" button
 
     // Tracks which script should be unlocked after the tutorial popup is closed
     private MonoBehaviour scriptToUnlock;
@@ -28,19 +34,15 @@ public class TutorialManager : MonoBehaviour
             confirmButton.onClick.AddListener(OnConfirmClicked);
     }
 
-    /// <summary>
-    /// Called by a TutorialTrigger when the player enters a zone.
-    /// Pauses the player and shows the instructions.
-    /// </summary>
+
     public void TriggerTutorial(string message, TutorialType type)
     {
-        // 1. Disable all player controls immediately
-        // This triggers OnDisable() in the scripts, stopping physics/input
+        // Disable all player controls immediately
         moveScript.enabled = false;
         jumpScript.enabled = false;
         bridgeScript.enabled = false;
 
-        // 2. Determine which ability to unlock based on the trigger type
+        // Determine which ability to unlock based on the trigger type
         switch (type)
         {
             case TutorialType.Jump:
@@ -49,10 +51,10 @@ public class TutorialManager : MonoBehaviour
             case TutorialType.Bridge:
                 scriptToUnlock = bridgeScript;
                 break;
-                // You can add cases here (e.g., Shoot, Dash)
+
         }
 
-        // 3. Update and show the UI
+        // Update and show the UI
         if (tutorialText != null)
             tutorialText.text = message;
 
@@ -60,20 +62,15 @@ public class TutorialManager : MonoBehaviour
             tutorialPanel.SetActive(true);
     }
 
-    /// <summary>
-    /// Called when the player clicks the UI button.
-    /// Resumes the game and unlocks the specific ability.
-    /// </summary>
     private void OnConfirmClicked()
     {
-        // 1. Hide the UI
+
         tutorialPanel.SetActive(false);
 
-        // 2. Always re-enable movement so the player can proceed
         moveScript.isPressedUI = true;
         moveScript.enabled = true;
 
-        // 3. Re-enable the specific learned skill
+        // Re-enable the specific learned skill
         if (scriptToUnlock != null)
         {
             scriptToUnlock.enabled = true;

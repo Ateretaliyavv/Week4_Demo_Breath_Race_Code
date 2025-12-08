@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MoveByDirection : MonoBehaviour
+public class SimpleMove : MonoBehaviour
 {
-    [SerializeField] private Vector3 direction = Vector3.right; // Movement direction (set in Inspector)
+    [SerializeField] private Vector3 direction = Vector3.right; // Movement direction
     [SerializeField] private float speed = 5f;                  // Movement speed
 
     private void Update()

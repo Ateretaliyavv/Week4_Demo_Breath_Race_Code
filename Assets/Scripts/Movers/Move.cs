@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /*
- * Moves the player forward while the right arrow key is held.
+ * Moves the player in a specified direction
  */
 
 public class Move : MonoBehaviour
@@ -11,8 +11,8 @@ public class Move : MonoBehaviour
     [SerializeField] Vector3 direction;
     [SerializeField] Animator animator;
     [SerializeField] InputAction startMove = new InputAction(type: InputActionType.Button); // Enter arrow key
-    public bool isPressedUI = false;
-    private bool isPressed = false;
+    public bool isPressedUI = false; // Set to true by UI button
+    private bool isPressed = false; 
 
     // Subscribe and unsubscribe to input action events
     void OnEnable()
@@ -21,6 +21,7 @@ public class Move : MonoBehaviour
         startMove.performed += OnWalkPressed;
     }
 
+    // Unsubscribe to input action events
     void OnDisable()
     {
         startMove.performed -= OnWalkPressed;
