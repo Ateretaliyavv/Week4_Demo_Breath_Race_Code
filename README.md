@@ -14,7 +14,7 @@ In the final version of the game, bridge-building and obstacle-jumping will be c
 ## eitch.io link - https://ateretaliya.itch.io/week6-breathrace-tutorial
 
 
-## UML - 
+## UML diagram- 
 
 <img width="828" height="509" alt="image" src="https://github.com/user-attachments/assets/a4ea9859-6186-46eb-936b-05c2100f40c2" />
 
