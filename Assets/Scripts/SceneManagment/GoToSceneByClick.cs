@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 /* 
  * This script allows a GameObject to load a specified scene when a method is called.
 */

@@ -10,6 +10,10 @@ public class Move : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] Vector3 direction;
     [SerializeField] Animator animator;
+
+    [Header("Animation")]
+    [SerializeField] bool useAnimator = true;   // Boolean to check if use animator
+
     [SerializeField] InputAction startMove = new InputAction(type: InputActionType.Button); // Enter arrow key
     public bool isPressedUI = false;
     private bool isPressed = false;
@@ -27,7 +31,10 @@ public class Move : MonoBehaviour
         startMove.Disable();
         isPressedUI = false;
         isPressed = false;
-        animator.SetBool("isWalking", false);
+
+        // Stop animation when disabled
+        if (useAnimator && animator != null)
+            animator.SetBool("isWalking", false);
 
         // Stop any residual movement
         if (GetComponent<Rigidbody2D>() != null)
@@ -44,12 +51,15 @@ public class Move : MonoBehaviour
         //Move the player on direction while the key is held
         if (isPressed || isPressedUI)
         {
-            animator.SetBool("isWalking", true);
+            if (useAnimator && animator != null)
+                animator.SetBool("isWalking", true);
+
             transform.position += direction.normalized * speed * Time.deltaTime;
         }
         else
         {
-            animator.SetBool("isWalking", false);
+            if (useAnimator && animator != null)
+                animator.SetBool("isWalking", false);
         }
     }
 }

@@ -7337,6 +7337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   StarsCounterText: {fileID: 1187179925}
   triggeringTag: Star
+  coverObjectTag: Balloon
 --- !u!1001 &1340882635
 PrefabInstance:
   m_ObjectHideFlags: 0

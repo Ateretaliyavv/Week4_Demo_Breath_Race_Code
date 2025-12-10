@@ -13,6 +13,7 @@ public class TutorialManager : MonoBehaviour
     [Header("Player Scripts References")]
     [SerializeField] private Move moveScript;
     [SerializeField] private Jump jumpScript;
+    [SerializeField] private BlowUpBalloons blowUpScript;
     [SerializeField] private BridgeBuilder bridgeScript;
 
     [Header("UI References")]
@@ -40,6 +41,7 @@ public class TutorialManager : MonoBehaviour
         // Disable all player controls immediately
         moveScript.enabled = false;
         jumpScript.enabled = false;
+        blowUpScript.enabled = false;
         bridgeScript.enabled = false;
 
         // Determine which ability to unlock based on the trigger type
@@ -50,6 +52,9 @@ public class TutorialManager : MonoBehaviour
                 break;
             case TutorialType.Bridge:
                 scriptToUnlock = bridgeScript;
+                break;
+            case TutorialType.BlowUp:
+                scriptToUnlock = blowUpScript;
                 break;
 
         }
@@ -82,5 +87,6 @@ public class TutorialManager : MonoBehaviour
 public enum TutorialType
 {
     Jump,
-    Bridge
+    Bridge,
+    BlowUp
 }

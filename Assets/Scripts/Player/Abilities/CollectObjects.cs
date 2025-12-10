@@ -2,31 +2,68 @@ using TMPro;
 using UnityEngine;
 
 /*
- * Collects objects with a specified tag when the player collides with them.
+ * Collects objects with a specified tag when the player collides with them,
+ * EXCEPT when there is a cover object exactly at the same position.
  */
-
 public class CollectObjects : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Cheese counter UI text")]
     TextMeshProUGUI StarsCounterText;
 
-    [SerializeField] string triggeringTag;
+    [SerializeField] string triggeringTag;   // Tag of the collectible (diamond)
+    [SerializeField] string coverObjectTag;  // Tag of the cover (balloon)
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // React only to the collectible objects
         if (!other.CompareTag(triggeringTag))
             return;
 
-        // Get the NumberFieldUI component on the UI text
-        NumberFieldUI uiCounter = StarsCounterText.GetComponent<NumberFieldUI>();
+        // Position of THIS specific diamond we just touched
+        Vector3 diamondPos = other.transform.position;
 
-        if (uiCounter != null)
+        // If this diamond has a cover on it - do NOT collect
+        if (!HasCoverOnTop(diamondPos))
         {
-            uiCounter.AddNumberUI(1);
-        }
+            // Get the NumberFieldUI component on the UI text
+            NumberFieldUI uiCounter = StarsCounterText.GetComponent<NumberFieldUI>();
 
-        // Remove the collected star from the scene
-        Destroy(other.gameObject);
+            if (uiCounter != null)
+            {
+                uiCounter.AddNumberUI(1);
+            }
+
+            // Remove the collected diamond from the scene
+            Destroy(other.gameObject);
+        }
+    }
+
+    // Checks if there is ANY cover object at the same XY as the given diamond position
+    private bool HasCoverOnTop(Vector3 diamondPos)
+    {
+        GameObject[] covers = GameObject.FindGameObjectsWithTag(coverObjectTag);
+
+        foreach (GameObject cover in covers)
+        {
+            if (cover == null) continue;
+
+            Vector3 coverPos = cover.transform.position;
+
+            if (AreSameXY(coverPos, diamondPos))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Returns true if two positions share the same X and Y (within a small epsilon)
+    public static bool AreSameXY(Vector3 a, Vector3 b, float epsilon = 0.35f)
+    {
+        bool sameX = Mathf.Abs(a.x - b.x) < epsilon;
+        bool sameY = Mathf.Abs(a.y - b.y) < epsilon;
+
+        return sameX && sameY;
     }
 }

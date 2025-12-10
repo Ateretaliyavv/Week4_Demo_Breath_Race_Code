@@ -138,7 +138,7 @@ public class Jump : MonoBehaviour
                 nextEndX = e.position.x;
         }
 
-        // If there's no JumpEnd ahead – אין אזור מוגדר
+        // If there's no JumpEnd ahead – not allowed
         if (nextEndX == float.PositiveInfinity)
             return false;
 

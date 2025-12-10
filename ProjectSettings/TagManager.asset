@@ -12,6 +12,9 @@ TagManager:
   - JumpEnd
   - Star
   - Dimond
+  - BlowStart
+  - BlowEnd
+  - Balloon
   layers:
   - Default
   - TransparentFX

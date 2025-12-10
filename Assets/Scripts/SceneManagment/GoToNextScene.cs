@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 /*
  * Change scene when the player collides with the trigger.
  */
